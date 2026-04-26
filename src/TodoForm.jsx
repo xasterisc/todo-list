@@ -6,10 +6,6 @@ const TodoForm = ({ onAddTodo }) => {
   const handleAddTodo = (event) => {
     event.preventDefault();
 
-    console.log('Event object:', event);
-    console.log('Event target:', event.target);
-    console.log('Input value:', event.target.form.todoTitle.value);
-
     const todoTitle = event.target.form.todoTitle.value.trim();
     if (todoTitle && todoTitle !== '') {
       onAddTodo(todoTitle);
