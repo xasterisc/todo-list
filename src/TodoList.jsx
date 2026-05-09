@@ -1,6 +1,6 @@
 import TodoListItem from './TodoListItem';
 
-const TodoList = ({ todoList }) => {
+const TodoList = ({ todoList, onCompleteTodo }) => {
   return (
     <>
       {todoList.length === 0 ? (
@@ -8,7 +8,11 @@ const TodoList = ({ todoList }) => {
       ) : (
         <ul>
           {todoList.map((todo) => (
-            <TodoListItem key={todo.id} todo={todo} />
+            <TodoListItem
+              key={todo.id}
+              todo={todo}
+              onCompleteTodo={onCompleteTodo}
+            />
           ))}
         </ul>
       )}
