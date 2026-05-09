@@ -14,6 +14,14 @@ function App() {
     };
     setTodoList((prev) => [newTodo, ...prev]);
   };
+
+  const completeTodo = (id) => {
+    setTodoList((prevList) =>
+      prevList.map((todo) =>
+        todo.id === id ? { ...todo, isCompleted: !todo.isCompleted } : todo
+      )
+    );
+  };
   return (
     <div>
       <h1>My Todos</h1>
