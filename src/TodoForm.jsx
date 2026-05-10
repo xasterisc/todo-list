@@ -9,10 +9,9 @@ const TodoForm = ({ onAddTodo }) => {
   const handleAddTodo = (event) => {
     event.preventDefault();
 
-    const todoTitle = event.target.todoTitle.value.trim();
-    if (todoTitle && todoTitle !== '') {
-      onAddTodo(todoTitle);
-      event.target.reset();
+    if (workingTodoTitle && workingTodoTitle !== '') {
+      onAddTodo(workingTodoTitle.trim());
+      setWorkingTodoTitle('');
       inputRef.current.focus();
     }
   };
