@@ -29,7 +29,9 @@ const TodoForm = ({ onAddTodo }) => {
         onChange={handleWorkingTodoTitle}
         required
       />
-      <button type='submit'>Add Todo</button>
+      <button type='submit' disabled={!workingTodoTitle.trim()}>
+        Add Todo
+      </button>
     </form>
   );
 };
