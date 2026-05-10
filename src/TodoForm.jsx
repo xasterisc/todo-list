@@ -3,6 +3,8 @@ import { useRef, useState } from 'react';
 const TodoForm = ({ onAddTodo }) => {
   const inputRef = useRef(null);
   const [workingTodoTitle, setWorkingTodoTitle] = useState('');
+  const handleWorkingTodoTitle = (event) =>
+    setWorkingTodoTitle(event.target.value);
 
   const handleAddTodo = (event) => {
     event.preventDefault();
@@ -24,6 +26,8 @@ const TodoForm = ({ onAddTodo }) => {
         id='todoTitle'
         name='todoTitle'
         placeholder={'Todo text'}
+        value={workingTodoTitle}
+        onChange={handleWorkingTodoTitle}
         required
       />
       <button type='submit'>Add Todo</button>
