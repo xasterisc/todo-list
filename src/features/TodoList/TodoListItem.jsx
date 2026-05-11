@@ -3,11 +3,23 @@ import TextInputWithLabel from '../../shared/TextInputWithLabel';
 
 const TodoListItem = ({ todo, onCompleteTodo }) => {
   const [isEditing, setIsEditing] = useState(false);
+  const [workingTitle, setWorkingTitle] = useState(todo.title);
+
+  const handleCancel = () => {
+    setWorkingTitle(todo.title);
+    setIsEditing(false);
+  };
+
   return (
     <li>
       <form>
         {isEditing ? (
-          <TextInputWithLabel value={todo.title} />
+          <>
+            <TextInputWithLabel value={todo.title} />
+            <button type='button' onClick={handleCancel}>
+              Cancel
+            </button>
+          </>
         ) : (
           <>
             <label>
