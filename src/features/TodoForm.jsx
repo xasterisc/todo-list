@@ -5,6 +5,7 @@ import { isValidTodoTitle } from '../utils/todoValidation';
 const TodoForm = ({ onAddTodo }) => {
   const inputRef = useRef(null);
   const [workingTodoTitle, setWorkingTodoTitle] = useState('');
+
   const handleWorkingTodoTitle = (event) =>
     setWorkingTodoTitle(event.target.value);
 
@@ -22,7 +23,7 @@ const TodoForm = ({ onAddTodo }) => {
     <form onSubmit={handleAddTodo}>
       <TextInputWithLabel
         elementId='todoTitle'
-        labelText='Todo'
+        labelText='Todo: '
         onChange={handleWorkingTodoTitle}
         ref={inputRef}
         value={workingTodoTitle}

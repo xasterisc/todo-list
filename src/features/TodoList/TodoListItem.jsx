@@ -28,7 +28,12 @@ const TodoListItem = ({ todo, onCompleteTodo, onUpdateTodo }) => {
       <form onSubmit={handleUpdate}>
         {isEditing ? (
           <>
-            <TextInputWithLabel value={workingTitle} onChange={handleEdit} />
+            <TextInputWithLabel
+              elementId={`edit${todo.id}`}
+              labelText='Todo: '
+              value={workingTitle}
+              onChange={handleEdit}
+            />
             <button type='button' onClick={cancelEdit}>
               Cancel
             </button>
