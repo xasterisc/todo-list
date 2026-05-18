@@ -26,7 +26,7 @@ const TodosPage = ({ token }) => {
         const data = await response.json();
         setTodoList(data.tasks);
       } catch (error) {
-        console.log(`Error: ${error.message}`);
+        setError(`Error: ${error.name} | ${error.message}`);
       } finally {
         setIsTodoListLoading(false);
       }
@@ -36,13 +36,44 @@ const TodosPage = ({ token }) => {
     }
   }, [token]);
 
-  const addTodo = (todoTitle) => {
+  const addTodo = async (todoTitle) => {
+    const newId = Date.now();
     const newTodo = {
-      id: Date.now(),
+      id: newId,
       title: todoTitle,
       isCompleted: false,
     };
     setTodoList((prev) => [newTodo, ...prev]);
+
+    try {
+      const options = {
+        method: 'POST',
+        body: JSON.stringify({
+          title: newTodo.title,
+          isCompleted: newTodo.isCompleted,
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-TOKEN': token,
+        },
+        credentials: 'include',
+      };
+      const response = await fetch('/api/tasks', options);
+      if (!response.ok) {
+        throw new Error(response.message || 'Failed to add todo');
+      }
+      const newTodoData = await response.json();
+      setTodoList((currentList) =>
+        currentList.map((todo) => (todo.id === newId ? newTodoData : todo))
+      );
+    } catch (error) {
+      setError(
+        `Error adding todo: ${newTodo.title} | Error message: ${error.message}`
+      );
+      setTodoList((currentList) =>
+        currentList.filter((todo) => todo.id !== newId)
+      );
+    }
   };
 
   const completeTodo = (id) => {
