@@ -1,13 +1,13 @@
 import { useState } from 'react';
 
-const Logon = ({ onSetEmail = () => {}, onSetToken = () => {} }) => {
+const Logon = ({ onSetEmail, onSetToken }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [authError, setAuthError] = useState('');
   const [isLoggingOn, setIsLoggingOn] = useState(false);
 
   const handleSubmit = async (event) => {
-    event.preventDefaul();
+    event.preventDefault();
     setIsLoggingOn(true);
     try {
       const response = await fetch('/api/users/logon', {
@@ -38,7 +38,7 @@ const Logon = ({ onSetEmail = () => {}, onSetToken = () => {} }) => {
         <label htmlFor='email'>email</label>
         <input
           type='email'
-          name='email'
+          id='email'
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
@@ -46,7 +46,7 @@ const Logon = ({ onSetEmail = () => {}, onSetToken = () => {} }) => {
         <label htmlFor='password'>password</label>
         <input
           type='password'
-          name='password'
+          id='password'
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
