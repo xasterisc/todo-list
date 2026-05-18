@@ -76,12 +76,40 @@ const TodosPage = ({ token }) => {
     }
   };
 
-  const completeTodo = (id) => {
+  const completeTodo = async (id) => {
+    const originalTodo = todoList.find((todo) => todo.id === id);
+
     setTodoList((prevList) =>
       prevList.map((todo) =>
         todo.id === id ? { ...todo, isCompleted: true } : todo
       )
     );
+
+    try {
+      const options = {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-TOKEN': token,
+        },
+        body: JSON.stringify({
+          isCompleted: true,
+          createdTime: originalTodo.createdTime,
+        }),
+        credentials: 'include',
+      };
+      const response = await fetch(`/api/tasks/${id}`, options);
+      if (!response.ok) {
+        throw new Error(response.message || 'Failed to complete todo');
+      }
+    } catch (error) {
+      setError(
+        `Error completing todo: ${originalTodo.title} | Error message: ${error.message}`
+      );
+      setTodoList((currentList) =>
+        currentList.map((todo) => (todo.id === id ? originalTodo : todo))
+      );
+    }
   };
 
   const updateTodo = (editedTodo) => {
