@@ -15,10 +15,11 @@ const TodoListItem = ({ todo, onCompleteTodo, onUpdateTodo }) => {
   const handleEdit = (event) => updateTitle(event.target.value);
 
   const handleUpdate = (event) => {
+    event.preventDefault();
+
     if (!isEditing || !isValidTodoTitle(workingTitle)) {
       return;
     }
-    event.preventDefault();
     const finalTitle = finishEdit();
     onUpdateTodo({ ...todo, title: finalTitle.trim() });
   };
