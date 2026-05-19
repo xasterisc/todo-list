@@ -6,15 +6,15 @@ import { useState } from 'react';
 
 function App() {
   const [email, setEmail] = useState('');
-  const [token, setTotken] = useState('');
+  const [token, setToken] = useState('');
 
   return (
     <div>
-      <Header token={token} onSetToken={setTotken} onSetEmail={setEmail} />
+      <Header token={token} onSetToken={setToken} onSetEmail={setEmail} />
       {token ? (
         <TodosPage token={token} />
       ) : (
-        <Logon onSetEmail={setEmail} onSetToken={setTotken} />
+        <Logon onSetEmail={setEmail} onSetToken={setToken} />
       )}
     </div>
   );
