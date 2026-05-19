@@ -17,7 +17,6 @@ const Logon = ({ onSetEmail, onSetToken }) => {
         body: JSON.stringify({ email, password }),
       });
       const data = await response.json();
-      console.dir(response);
       if (response.status === 200 && data.name && data.csrfToken) {
         onSetEmail(data.name);
         onSetToken(data.csrfToken);
