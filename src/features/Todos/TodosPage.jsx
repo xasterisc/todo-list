@@ -112,11 +112,42 @@ const TodosPage = ({ token }) => {
     }
   };
 
-  const updateTodo = (editedTodo) => {
+  const updateTodo = async (editedTodo) => {
+    const originalTodo = todoList.find((todo) => todo.id === editedTodo.id);
+
     const updatedTodos = todoList.map((todo) =>
       todo.id === editedTodo.id ? { ...editedTodo } : todo
     );
     setTodoList(updatedTodos);
+
+    try {
+      const options = {
+        method: 'PATCH',
+        body: JSON.stringify({
+          title: editedTodo.title,
+          isCompleted: editedTodo.isCompleted,
+          createdTime: editedTodo.createdTime,
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-TOKEN': token,
+        },
+        credentials: 'include',
+      };
+      const response = await fetch(`/api/tasks/${editedTodo.id}`, options);
+      if (!response.ok) {
+        throw new Error(response.message || 'Failed to update todo');
+      }
+    } catch (error) {
+      setError(
+        `Error updating todo: ${editedTodo.title} || Error message: ${error.message}`
+      );
+      setTodoList((currentList) =>
+        currentList.map((todo) =>
+          todo.id === editedTodo.id ? originalTodo : todo
+        )
+      );
+    }
   };
   return (
     <>
