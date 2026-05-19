@@ -151,6 +151,13 @@ const TodosPage = ({ token }) => {
   };
   return (
     <>
+      {error && (
+        <div>
+          <p>{error}</p>
+          <button onClick={() => setError('')}>Clear Error</button>
+        </div>
+      )}
+      {isTodoListLoading && <p>Loading todos ...</p>}
       <TodoForm onAddTodo={addTodo} />
       <TodoList
         todoList={todoList}
