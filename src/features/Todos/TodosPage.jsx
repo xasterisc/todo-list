@@ -37,9 +37,9 @@ const TodosPage = ({ token }) => {
   }, [token]);
 
   const addTodo = async (todoTitle) => {
-    const newId = Date.now();
+    const tempId = Date.now();
     const newTodo = {
-      id: newId,
+      id: tempId,
       title: todoTitle,
       isCompleted: false,
     };
@@ -64,14 +64,14 @@ const TodosPage = ({ token }) => {
       }
       const newTodoData = await response.json();
       setTodoList((currentList) =>
-        currentList.map((todo) => (todo.id === newId ? newTodoData : todo))
+        currentList.map((todo) => (todo.id === tempId ? newTodoData : todo))
       );
     } catch (error) {
       setError(
         `Error adding todo: ${newTodo.title} | Error message: ${error.message}`
       );
       setTodoList((currentList) =>
-        currentList.filter((todo) => todo.id !== newId)
+        currentList.filter((todo) => todo.id !== tempId)
       );
     }
   };
