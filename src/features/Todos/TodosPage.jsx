@@ -94,7 +94,6 @@ const TodosPage = ({ token }) => {
         },
         body: JSON.stringify({
           isCompleted: true,
-          createdTime: originalTodo.createdTime,
         }),
         credentials: 'include',
       };
@@ -126,7 +125,6 @@ const TodosPage = ({ token }) => {
         body: JSON.stringify({
           title: editedTodo.title,
           isCompleted: editedTodo.isCompleted,
-          createdTime: editedTodo.createdTime,
         }),
         headers: {
           'Content-Type': 'application/json',
