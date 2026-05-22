@@ -1,6 +1,6 @@
-import TextInputWithLabel from '../../shared/TextInputWithLabel';
-import { isValidTodoTitle } from '../../utils/todoValidation';
-import { useEditableTitle } from '../../hooks/useEditableTitle';
+import TextInputWithLabel from '../../../shared/TextInputWithLabel';
+import { isValidTodoTitle } from '../../../utils/todoValidation';
+import { useEditableTitle } from '../../../hooks/useEditableTitle';
 
 const TodoListItem = ({ todo, onCompleteTodo, onUpdateTodo }) => {
   const {
@@ -15,10 +15,11 @@ const TodoListItem = ({ todo, onCompleteTodo, onUpdateTodo }) => {
   const handleEdit = (event) => updateTitle(event.target.value);
 
   const handleUpdate = (event) => {
-    if (!isEditing) {
+    event.preventDefault();
+
+    if (!isEditing || !isValidTodoTitle(workingTitle)) {
       return;
     }
-    event.preventDefault();
     const finalTitle = finishEdit();
     onUpdateTodo({ ...todo, title: finalTitle.trim() });
   };
