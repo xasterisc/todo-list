@@ -174,12 +174,12 @@ const TodosPage = ({ token }) => {
     }
   };
 
-  const handleSortByChange = (event) => {
-    setSortBy(event.target.value);
+  const handleSortByChange = (newSort) => {
+    setSortBy(newSort);
   };
 
-  const handleSortDirectionChange = (event) => {
-    setSortDirection(event.target.value);
+  const handleSortDirectionChange = (newDirection) => {
+    setSortDirection(newDirection);
   };
 
   return (
