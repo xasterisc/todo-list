@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import TodoForm from './TodoForm';
 import TodoList from './TodoList/TodoList';
+import SortBy from '../../shared/SortBy';
 
 const TodosPage = ({ token }) => {
   const [todoList, setTodoList] = useState([]);
@@ -161,6 +162,15 @@ const TodosPage = ({ token }) => {
       );
     }
   };
+
+  const handleSortByChange = useCallback((event) => {
+    setSortBy(event.target.value);
+  }, []);
+
+  const handleSortDirectionChange = useCallback((event) => {
+    setSortDirection(event.target.value);
+  }, []);
+
   return (
     <>
       {error && (
@@ -170,6 +180,12 @@ const TodosPage = ({ token }) => {
         </div>
       )}
       {isTodoListLoading && <p>Loading todos ...</p>}
+      <SortBy
+        sortBy={sortBy}
+        sortDirection={sortDirection}
+        onSortByChange={handleSortByChange}
+        onSortDirectionChange={handleSortDirectionChange}
+      />
       <TodoForm onAddTodo={addTodo} />
       <TodoList
         todoList={todoList}
