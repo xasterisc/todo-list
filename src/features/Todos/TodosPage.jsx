@@ -48,7 +48,7 @@ const TodosPage = ({ token }) => {
     }
 
     return () => fetchController.abort();
-  }, [token]);
+  }, [sortBy, sortDirection, token]);
 
   const addTodo = async (todoTitle) => {
     const tempId = Date.now();
