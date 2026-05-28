@@ -10,15 +10,23 @@ const TodosPage = ({ token }) => {
   const [sortDirection, setSortDirection] = useState('desc');
 
   useEffect(() => {
+    const fetchController = new AbortController();
+    const { signal } = fetchController;
+
     const fetchTodos = async () => {
+      const params = new URLSearchParams({
+        sortBy,
+        sortDirection,
+      });
       const options = {
         method: 'GET',
         headers: { 'X-CSRF-TOKEN': token },
         credentials: 'include',
+        signal,
       };
       try {
         setIsTodoListLoading(true);
-        const response = await fetch('/api/tasks', options);
+        const response = await fetch(`/api/tasks?${params}`, options);
         if (!response.ok) {
           if (response.status === 401) {
             throw new Error('unauthorized');
@@ -27,8 +35,10 @@ const TodosPage = ({ token }) => {
         }
         const data = await response.json();
         setTodoList(data.tasks);
-      } catch (error) {
-        setError(`Error: ${error.name} | ${error.message}`);
+      } catch (err) {
+        if (err.name !== 'AbortError') {
+          setError(`Error: ${err.name} | ${err.message}`);
+        }
       } finally {
         setIsTodoListLoading(false);
       }
@@ -36,6 +46,8 @@ const TodosPage = ({ token }) => {
     if (token) {
       fetchTodos();
     }
+
+    return () => fetchController.abort();
   }, [token]);
 
   const addTodo = async (todoTitle) => {
