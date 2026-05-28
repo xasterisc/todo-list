@@ -1,4 +1,4 @@
-const FilterInput = (filterTerm, onFilterChange) => {
+const FilterInput = ({ filterTerm, onFilterChange }) => {
   return (
     <div>
       <label htmlFor='filterInput'>Search todos</label>
