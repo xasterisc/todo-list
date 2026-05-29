@@ -213,6 +213,7 @@ const TodosPage = ({ token }) => {
       <TodoForm onAddTodo={addTodo} />
       <TodoList
         todoList={todoList}
+        dataVersion={dataVersion}
         onCompleteTodo={completeTodo}
         onUpdateTodo={updateTodo}
       />
