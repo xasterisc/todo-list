@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import TodoForm from './TodoForm';
 import TodoList from './TodoList/TodoList';
 import SortBy from '../../shared/SortBy';
@@ -13,6 +13,12 @@ const TodosPage = ({ token }) => {
   const [sortDirection, setSortDirection] = useState('desc');
   const [filterTerm, setFilterTerm] = useState('');
   const debouncedFilterTerm = useDebounce(filterTerm, 300);
+  const [dataVersion, setDataVersion] = useState(0);
+
+  const invalidateCache = useCallback(() => {
+    setDataVersion((prev) => prev + 1);
+    console.log('Invalidating memo cache after todo mutation');
+  }, []);
 
   const handleFilterChange = (newTerm) => {
     setFilterTerm(newTerm);
@@ -92,6 +98,7 @@ const TodosPage = ({ token }) => {
       setTodoList((currentList) =>
         currentList.map((todo) => (todo.id === tempId ? newTodoData : todo))
       );
+      invalidateCache();
     } catch (error) {
       setError(
         `Error adding todo: ${newTodo.title} | Error message: ${error.message}`
@@ -127,6 +134,7 @@ const TodosPage = ({ token }) => {
       if (!response.ok) {
         throw new Error(response.message || 'Failed to complete todo');
       }
+      invalidateCache();
     } catch (error) {
       setError(
         `Error completing todo: ${originalTodo.title} | Error message: ${error.message}`
@@ -162,6 +170,7 @@ const TodosPage = ({ token }) => {
       if (!response.ok) {
         throw new Error(response.message || 'Failed to update todo');
       }
+      invalidateCache();
     } catch (error) {
       setError(
         `Error updating todo: ${editedTodo.title} || Error message: ${error.message}`
