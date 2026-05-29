@@ -8,6 +8,7 @@ import FilterInput from '../../shared/FilterInput';
 const TodosPage = ({ token }) => {
   const [todoList, setTodoList] = useState([]);
   const [error, setError] = useState('');
+  const [filterError, setFilterError] = useState('');
   const [isTodoListLoading, setIsTodoListLoading] = useState(false);
   const [sortBy, setSortBy] = useState('creationDate');
   const [sortDirection, setSortDirection] = useState('desc');
@@ -53,9 +54,18 @@ const TodosPage = ({ token }) => {
         }
         const data = await response.json();
         setTodoList(data.tasks);
+        setFilterError('');
       } catch (err) {
         if (err.name !== 'AbortError') {
-          setError(`Error: ${err.name} | ${err.message}`);
+          if (
+            debouncedFilterTerm ||
+            sortBy !== 'creationDate' ||
+            sortDirection !== 'desc'
+          ) {
+            setFilterError(`Error filtering/sorting todos: ${err.message}`);
+          } else {
+            setError(`Error fetching todos: ${err.message}`);
+          }
         }
       } finally {
         setIsTodoListLoading(false);
@@ -197,6 +207,22 @@ const TodosPage = ({ token }) => {
         <div>
           <p>{error}</p>
           <button onClick={() => setError('')}>Clear Error</button>
+        </div>
+      )}
+      {filterError && (
+        <div>
+          <p>{filterError}</p>
+          <button onClick={() => setFilterError('')}>Clear Filter Error</button>
+          <button
+            onClick={() => {
+              setFilterTerm('');
+              setSortBy('creationDate');
+              setSortDirection('desc');
+              setFilterError('');
+            }}
+          >
+            Reset Filters
+          </button>
         </div>
       )}
       {isTodoListLoading && <p>Loading todos ...</p>}
