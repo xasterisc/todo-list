@@ -3,7 +3,6 @@ import TodoListItem from './TodoListItem';
 
 const TodoList = ({ dataVersion, onCompleteTodo, onUpdateTodo, todoList }) => {
   const filteredTodoList = useMemo(() => {
-    console.log(`Recalculating filtered todos (${dataVersion})`);
     return {
       version: dataVersion,
       todos: todoList.filter((todo) => !todo.isCompleted),
