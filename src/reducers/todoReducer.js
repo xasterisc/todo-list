@@ -23,7 +23,6 @@ export const TODO_ACTIONS = {
   CLEAR_ERROR: 'CLEAR_ERROR',
   CLEAR_FILTER_ERROR: 'CLEAR_FILTER_ERROR',
   RESET_FILTERS: 'RESET_FILTERS',
-  INVALIDATE_CACHE: 'INVALIDATE_CACHE',
 };
 
 export const initialTodoState = {
@@ -188,12 +187,6 @@ export const todoReducer = (state, action) => {
         sortBy: 'creationDate',
         sortDirection: 'desc',
         filterError: '',
-      };
-
-    case TODO_ACTIONS.INVALIDATE_CACHE:
-      return {
-        ...state,
-        dataVersion: state.dataVersion + 1,
       };
 
     default:

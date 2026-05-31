@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useReducer } from 'react';
+import { useEffect, useReducer } from 'react';
 import TodoForm from './TodoForm';
 import TodoList from './TodoList/TodoList';
 import SortBy from '../../shared/SortBy';
@@ -22,10 +22,6 @@ const TodosPage = ({ token }) => {
     filterTerm,
     dataVersion,
   } = state;
-
-  const invalidateCache = useCallback(() => {
-    dispatch({ type: TODO_ACTIONS.INVALIDATE_CACHE });
-  }, []);
 
   const debouncedFilterTerm = useDebounce(filterTerm, 300);
 
@@ -133,7 +129,6 @@ const TodosPage = ({ token }) => {
           newTodoData,
         },
       });
-      invalidateCache();
     } catch (error) {
       dispatch({
         type: TODO_ACTIONS.ADD_TODO_ERROR,
