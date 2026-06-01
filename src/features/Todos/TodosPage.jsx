@@ -9,8 +9,10 @@ import {
   TODO_ACTIONS,
   todoReducer,
 } from '../../reducers/todoReducer';
+import { useAuth } from '../../contexts/AuthContext';
 
-const TodosPage = ({ token }) => {
+const TodosPage = () => {
+  const { token } = useAuth();
   const [state, dispatch] = useReducer(todoReducer, initialTodoState);
   const {
     todoList,

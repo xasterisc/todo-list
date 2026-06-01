@@ -1,5 +1,19 @@
+import { useAuth } from '../contexts/AuthContext';
+import Logoff from '../features/Logoff';
+
 const Header = () => {
-  return <h1>Todo List</h1>;
+  const { isAuthenticated } = useAuth();
+
+  return (
+    <>
+      <h1>Todo List</h1>
+      {isAuthenticated && (
+        <div>
+          <Logoff />
+        </div>
+      )}
+    </>
+  );
 };
 
 export default Header;
