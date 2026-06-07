@@ -61,8 +61,8 @@ export const todoReducer = (state, action) => {
         action.payload;
       if (
         debouncedFilterTerm ||
-        sortBy !== 'creationDate' ||
-        sortDirection !== 'desc'
+        sortBy !== 'createdDate' ||
+        sortDirection !== 'asc'
       ) {
         return {
           ...state,
