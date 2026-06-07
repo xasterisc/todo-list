@@ -11,7 +11,7 @@ const Logoff = () => {
     setError('');
 
     const response = await logout();
-    if (!response.logout) {
+    if (!response.success) {
       setError(response.error);
       setIsLoggingOff(false);
     }
