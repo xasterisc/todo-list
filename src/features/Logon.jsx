@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import { useAuth } from '../contexts/AuthContext';
 
-const Logon = ({ onSetEmail, onSetToken }) => {
+const Logon = () => {
+  const { login } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [authError, setAuthError] = useState('');
@@ -9,19 +11,13 @@ const Logon = ({ onSetEmail, onSetToken }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setIsLoggingOn(true);
+    setAuthError('');
+
     try {
-      const response = await fetch('/api/users/logon', {
-        method: 'POST',
-        headers: { 'Content-type': 'application/json' },
-        credentials: 'include',
-        body: JSON.stringify({ email, password }),
-      });
-      const data = await response.json();
-      if (response.status === 200 && data.name && data.csrfToken) {
-        onSetEmail(data.name);
-        onSetToken(data.csrfToken);
-      } else {
-        setAuthError(`Authentication failed: ${data?.message}`);
+      const response = await login(email, password);
+
+      if (!response.success) {
+        setAuthError(response.error);
       }
     } catch (error) {
       setAuthError(`Error: ${error.name} | ${error.message}`);
@@ -34,6 +30,7 @@ const Logon = ({ onSetEmail, onSetToken }) => {
     <>
       {authError && <p>{authError}</p>}
       <form onSubmit={handleSubmit}>
+        <p>Please log on</p>
         <label htmlFor='email'>email</label>
         <input
           type='email'
