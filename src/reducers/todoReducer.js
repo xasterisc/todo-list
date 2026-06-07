@@ -184,8 +184,8 @@ export const todoReducer = (state, action) => {
       return {
         ...state,
         filterTerm: '',
-        sortBy: 'creationDate',
-        sortDirection: 'desc',
+        sortBy: 'createdDate',
+        sortDirection: 'asc',
         filterError: '',
       };
 
