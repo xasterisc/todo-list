@@ -29,9 +29,9 @@ export const initialTodoState = {
   todoList: [],
   error: '',
   filterError: '',
-  isTodoListLoading: false,
-  sortBy: 'creationDate',
-  sortDirection: 'desc',
+  isTodoListLoading: true,
+  sortBy: 'createdDate',
+  sortDirection: 'asc',
   filterTerm: '',
   dataVersion: 0,
 };
