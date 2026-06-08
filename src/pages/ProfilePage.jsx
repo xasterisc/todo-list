@@ -3,7 +3,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { Link } from 'react-router';
 
 const ProfilePage = () => {
-  const { email, token } = useAuth();
+  const { name, token } = useAuth();
   const [statistics, setStatistics] = useState({
     total: 0,
     completed: 0,
@@ -65,7 +65,7 @@ const ProfilePage = () => {
 
       <section>
         <h3>Account Information</h3>
-        <pre>user: {email}</pre>
+        <pre>user: {name}</pre>
       </section>
 
       <section>
