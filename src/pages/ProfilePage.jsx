@@ -6,22 +6,16 @@ const ProfilePage = () => {
   const { email, token } = useAuth();
   const [statistics, setStatistics] = useState({
     total: 0,
-    completed: 0,
-    active: 0,
   });
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
 
   useEffect(() => {
-    const controller = new AbortController();
-    const { signal } = controller;
-
     const fetchStatistics = async () => {
       const options = {
         method: 'GET',
         headers: { 'X-CSRF-TOKEN': token },
         credentials: 'include',
-        signal,
       };
 
       try {
@@ -37,10 +31,8 @@ const ProfilePage = () => {
         }
         const data = await response.json();
 
-        const total = data.length;
-        const completed = data.filter((todo) => todo.isCompleted).length;
-        const active = total - completed;
-        setStatistics({ total, completed, active });
+        const total = data.pagination.total;
+        setStatistics({ total });
       } catch (err) {
         setError(`Error loading statistics: ${err.message}`);
       } finally {
@@ -50,7 +42,6 @@ const ProfilePage = () => {
     if (token) {
       fetchStatistics();
     }
-    return () => controller.abort();
   }, [token]);
 
   return (
@@ -59,7 +50,7 @@ const ProfilePage = () => {
 
       <section>
         <h3>Account Information</h3>
-        <pre>user email: {email}</pre>
+        <pre>user: {email}</pre>
       </section>
 
       <section>
@@ -75,14 +66,6 @@ const ProfilePage = () => {
             <p>
               <strong>Total todos: </strong>
               {statistics.total}
-            </p>
-            <p>
-              <strong>Completed todos: </strong>
-              {statistics.completed}
-            </p>
-            <p>
-              <strong>Active todos: </strong>
-              {statistics.active}
             </p>
           </div>
         ) : (
