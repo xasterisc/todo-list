@@ -6,12 +6,14 @@ const ProfilePage = () => {
   const { email, token } = useAuth();
   const [statistics, setStatistics] = useState({
     total: 0,
+    completed: 0,
+    active: 0,
   });
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
 
   useEffect(() => {
-    const fetchStatistics = async () => {
+    const fetchTodoStats = async () => {
       const options = {
         method: 'GET',
         headers: { 'X-CSRF-TOKEN': token },
@@ -22,17 +24,30 @@ const ProfilePage = () => {
         setIsLoading(true);
         setError('');
 
-        const response = await fetch('/api/tasks', options);
-        if (!response.ok) {
-          if (response.status === 401) {
-            throw new Error('unauthorized');
-          }
-          throw new Error(response.message || 'failed to fetch statistics');
-        }
-        const data = await response.json();
+        const [responseAll, responseCompleted] = await Promise.all([
+          fetch('/api/tasks', options),
+          fetch('/api/tasks?isCompleted=true', options),
+        ]);
 
-        const total = data.pagination.total;
-        setStatistics({ total });
+        if (!responseAll.ok) {
+          if (responseAll.status === 401) throw new Error('unauthorized');
+          throw new Error('Failed to fetch all todos');
+        }
+
+        if (!responseCompleted.ok) {
+          if (responseCompleted.status === 401) throw new Error('unauthorized');
+          throw new Error('Failed to fetch completed todos');
+        }
+        const [todosAll, todosCompleted] = await Promise.all([
+          responseAll.json(),
+          responseCompleted.json(),
+        ]);
+
+        const total = todosAll.pagination.total;
+        const completed = todosCompleted.pagination.total;
+        const active = total - completed;
+
+        setStatistics({ total, completed, active });
       } catch (err) {
         setError(`Error loading statistics: ${err.message}`);
       } finally {
@@ -40,7 +55,7 @@ const ProfilePage = () => {
       }
     };
     if (token) {
-      fetchStatistics();
+      fetchTodoStats();
     }
   }, [token]);
 
@@ -66,6 +81,14 @@ const ProfilePage = () => {
             <p>
               <strong>Total todos: </strong>
               {statistics.total}
+            </p>
+            <p>
+              <strong>Completed todos: </strong>
+              {statistics.completed}
+            </p>
+            <p>
+              <strong>Active todos: </strong>
+              {statistics.active}
             </p>
           </div>
         ) : (
