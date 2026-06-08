@@ -1,14 +1,14 @@
 const AboutPage = () => {
   return (
     <div>
-      <h1>About This Todo App</h1>
+      <h2>About This Todo App</h2>
       <p>
         This is a React-based todo application that helps you organize and
         manage your daily tasks in a simple and efficient way.
       </p>
 
       <section>
-        <h2>Features</h2>
+        <h3>Features</h3>
         <ul>
           <li>Add new todos</li>
           <li>Mark todos as completed</li>
@@ -20,7 +20,7 @@ const AboutPage = () => {
       </section>
 
       <section>
-        <h2>Technologies Used</h2>
+        <h3>Technologies Used</h3>
         <ul>
           <li>React</li>
           <li>React Router</li>
