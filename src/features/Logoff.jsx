@@ -13,11 +13,12 @@ const Logoff = () => {
     setError('');
 
     const response = await logout();
-    if (!response.success) {
+    if (response.success) {
+      navigate('/login');
+    } else {
       setError(response.error);
       setIsLoggingOff(false);
     }
-    navigate('/login');
   };
 
   return (
