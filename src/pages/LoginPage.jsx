@@ -1,36 +1,46 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router';
 import { useAuth } from '../contexts/AuthContext';
 
-const Logon = () => {
-  const { login } = useAuth();
+const LoginPage = () => {
+  const { login, isAuthenticated } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [authError, setAuthError] = useState('');
   const [isLoggingOn, setIsLoggingOn] = useState(false);
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const from = location.state?.from?.pathname || '/todos';
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate(from, { replace: true });
+    }
+  }, [isAuthenticated, navigate, from]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     setIsLoggingOn(true);
     setAuthError('');
 
     try {
       const response = await login(email, password);
-
       if (!response.success) {
         setAuthError(response.error);
       }
-    } catch (error) {
-      setAuthError(`Error: ${error.name} | ${error.message}`);
+    } catch (err) {
+      setAuthError(`Error: ${err.name} | ${err.message}`);
     } finally {
       setIsLoggingOn(false);
     }
   };
-
   return (
     <>
       {authError && <p>{authError}</p>}
+      <p>You must log in to view the page at {from}</p>
+
       <form onSubmit={handleSubmit}>
-        <p>Please log on</p>
         <label htmlFor='email'>email</label>
         <input
           type='email'
@@ -50,11 +60,11 @@ const Logon = () => {
           required
         />
         <button type='submit' disabled={isLoggingOn}>
-          {isLoggingOn ? 'Logging in...' : 'Log On'}
+          {isLoggingOn ? 'Logging in...' : 'Log In'}
         </button>
       </form>
     </>
   );
 };
 
-export default Logon;
+export default LoginPage;

@@ -11,7 +11,7 @@ const useAuth = () => {
 };
 
 const AuthProvider = ({ children }) => {
-  const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
   const [token, setToken] = useState('');
 
   const login = async (userEmail, password) => {
@@ -24,18 +24,19 @@ const AuthProvider = ({ children }) => {
       };
 
       const res = await fetch('/api/users/logon', options);
-      const data = await res.json();
+      if (res.ok) {
+        const data = await res.json();
 
-      if (res.status === 200 && data.name && data.csrfToken) {
-        setEmail(data.name);
-        setToken(data.csrfToken);
-        return { success: true };
-      } else {
-        return {
-          success: false,
-          error: `Authentication failed: ${data?.message}`,
-        };
+        if (data.name && data.csrfToken) {
+          setName(data.name);
+          setToken(data.csrfToken);
+          return { success: true };
+        }
       }
+      return {
+        success: false,
+        error: 'Authentication failed: Invalid data received.',
+      };
     } catch (error) {
       return {
         success: false,
@@ -46,7 +47,7 @@ const AuthProvider = ({ children }) => {
 
   const logout = async () => {
     if (!token) {
-      setEmail('');
+      setName('');
       setToken('');
       return { success: true };
     }
@@ -59,7 +60,7 @@ const AuthProvider = ({ children }) => {
 
       const res = await fetch('/api/users/logoff', options);
       if (res.status === 200 || res.status === 401) {
-        setEmail('');
+        setName('');
         setToken('');
         return { success: true };
       } else {
@@ -78,7 +79,7 @@ const AuthProvider = ({ children }) => {
   };
 
   const value = {
-    email,
+    name,
     token,
     isAuthenticated: !!token,
     login,
