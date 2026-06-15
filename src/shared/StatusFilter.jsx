@@ -1,7 +1,7 @@
 import { useSearchParams } from 'react-router';
 
 const StatusFilter = () => {
-  const [searchParams, SetSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const currentStatus = searchParams.get('status') || 'all';
 
   const handleStatusChange = (status) => {
@@ -10,7 +10,7 @@ const StatusFilter = () => {
     } else {
       searchParams.set('status', status);
     }
-    SetSearchParams(searchParams);
+    setSearchParams(searchParams);
   };
 
   return (
