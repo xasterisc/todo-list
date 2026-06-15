@@ -1,5 +1,6 @@
 import { useAuth } from '../contexts/AuthContext';
 import Logoff from '../features/Logoff';
+import Navigation from './Navigation';
 
 const Header = () => {
   const { isAuthenticated } = useAuth();
@@ -7,6 +8,7 @@ const Header = () => {
   return (
     <>
       <h1>Todo List</h1>
+      <Navigation />
       {isAuthenticated && (
         <div>
           <Logoff />
