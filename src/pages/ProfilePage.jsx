@@ -90,6 +90,10 @@ const ProfilePage = () => {
               <strong>Active todos: </strong>
               {statistics.active}
             </p>
+            <p>
+              <strong>Completion Rate:</strong>{' '}
+              {Math.round((statistics.completed / statistics.total) * 100)}%
+            </p>
           </div>
         ) : (
           <Link to='/todos'> Your todo list is empty — let's start one!</Link>
