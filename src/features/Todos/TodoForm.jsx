@@ -3,7 +3,6 @@ import TextInputWithLabel from '../../shared/TextInputWithLabel';
 import {
   isValidTodoTitle,
   getTodoValidationError,
-  MAX_TODO_LENGTH,
 } from '../../utils/todoValidation';
 import { sanitizeInput } from '../../utils/security';
 
@@ -13,9 +12,15 @@ const TodoForm = ({ onAddTodo }) => {
   const [localError, setLocalError] = useState('');
 
   const handleWorkingTodoTitle = (event) => {
-    setWorkingTodoTitle(event.target.value);
-    // Clear any existing errors as soon as the user starts typing again
-    if (localError) setLocalError('');
+    const newValue = event.target.value;
+    setWorkingTodoTitle(newValue);
+
+    const validationError = getTodoValidationError(newValue);
+    if (validationError) {
+      setLocalError(validationError);
+    } else {
+      setLocalError('');
+    }
   };
 
   const handleAddTodo = (event) => {
@@ -43,7 +48,6 @@ const TodoForm = ({ onAddTodo }) => {
 
   return (
     <>
-      {localError && <p>{localError}</p>}
       <form onSubmit={handleAddTodo}>
         <TextInputWithLabel
           elementId='todoTitle'
@@ -51,12 +55,12 @@ const TodoForm = ({ onAddTodo }) => {
           onChange={handleWorkingTodoTitle}
           ref={inputRef}
           value={workingTodoTitle}
-          maxLength={MAX_TODO_LENGTH}
         />
         <button type='submit' disabled={!isValidTodoTitle(workingTodoTitle)}>
           Add Todo
         </button>
       </form>
+      {localError && <p>{localError}</p>}
     </>
   );
 };
