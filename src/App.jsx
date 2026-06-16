@@ -8,33 +8,37 @@ import ProfilePage from './pages/ProfilePage';
 import NotFoundPage from './pages/NotFoundPage';
 import RequireAuth from './components/RequireAuth';
 import { Routes, Route } from 'react-router';
+import './App.css';
+import styles from './App.module.css';
 
 function App() {
   return (
     <>
-      <Header />
-      <Routes>
-        <Route path='/' element={<HomePage />} />
-        <Route path='/about' element={<AboutPage />} />
-        <Route path='/login' element={<LoginPage />} />
-        <Route
-          path='/todos'
-          element={
-            <RequireAuth>
-              <TodosPage />
-            </RequireAuth>
-          }
-        />
-        <Route
-          path='/profile'
-          element={
-            <RequireAuth>
-              <ProfilePage />
-            </RequireAuth>
-          }
-        />
-        <Route path='*' element={<NotFoundPage />} />
-      </Routes>
+      <div className={styles.wrapper}>
+        <Header />
+        <Routes>
+          <Route path='/' element={<HomePage />} />
+          <Route path='/about' element={<AboutPage />} />
+          <Route path='/login' element={<LoginPage />} />
+          <Route
+            path='/todos'
+            element={
+              <RequireAuth>
+                <TodosPage />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path='/profile'
+            element={
+              <RequireAuth>
+                <ProfilePage />
+              </RequireAuth>
+            }
+          />
+          <Route path='*' element={<NotFoundPage />} />
+        </Routes>
+      </div>
     </>
   );
 }

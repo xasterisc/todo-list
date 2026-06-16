@@ -1,0 +1,12 @@
+.todo {
+  margin-bottom: 0.25rem;
+}
+
+.errorWrapper {
+  color: darkred;
+  font-weight: bold;
+  border: 1px solid red;
+  padding: 1rem;
+  width: 90vw;
+  max-width: 500px;
+}
