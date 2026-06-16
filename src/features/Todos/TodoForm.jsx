@@ -58,7 +58,7 @@ const TodoForm = ({ onAddTodo }) => {
           Add Todo
         </button>
       </form>
-      {localError && <p>{localError}</p>}
+      {localError && <pre>{localError}</pre>}
     </>
   );
 };
