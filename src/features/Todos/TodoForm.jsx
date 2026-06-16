@@ -39,11 +39,9 @@ const TodoForm = ({ onAddTodo }) => {
       return;
     }
 
-    if (safeInput) {
-      onAddTodo(safeInput);
-      setWorkingTodoTitle('');
-      inputRef.current.focus();
-    }
+    onAddTodo(safeInput);
+    setWorkingTodoTitle('');
+    inputRef.current.focus();
   };
 
   return (
