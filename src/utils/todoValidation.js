@@ -8,9 +8,9 @@ const isValidTodoTitle = (title) => {
 
 const getTodoValidationError = (title) => {
   const trimmed = title.trim();
-  if (trimmed === '') return 'Please enter a valid task.';
+  if (trimmed === '') return 'Please enter a valid todo.';
   if (trimmed.length > MAX_TODO_LENGTH)
-    return `Task cannot exceed ${MAX_TODO_LENGTH} characters.`;
+    return `Todo cannot exceed ${MAX_TODO_LENGTH} characters.`;
   return '';
 };
 
