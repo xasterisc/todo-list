@@ -14,4 +14,4 @@ const getTodoValidationError = (title) => {
   return '';
 };
 
-export { isValidTodoTitle, MAX_TODO_LENGTH, getTodoValidationError };
+export { isValidTodoTitle, getTodoValidationError };
