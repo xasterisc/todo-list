@@ -18,7 +18,6 @@ const useEditableTitle = (initialTitle) => {
 
   const finishEdit = () => {
     setIsEditing(false);
-    return workingTitle;
   };
 
   return {

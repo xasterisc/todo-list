@@ -53,8 +53,8 @@ const TodoListItem = ({ todo, onCompleteTodo, onUpdateTodo }) => {
       return;
     }
 
-    const finalTitle = finishEdit();
-    onUpdateTodo({ ...todo, title: finalTitle.trim() });
+    finishEdit();
+    onUpdateTodo({ ...todo, title: safeTitle });
   };
 
   return (
