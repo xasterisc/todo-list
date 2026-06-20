@@ -1,0 +1,37 @@
+.wrapper {
+  margin-left: auto;
+}
+
+.btnGrad {
+  background-image: linear-gradient(
+    to right,
+    #52c234 0%,
+    #061700 51%,
+    #52c234 100%
+  );
+}
+
+.btnGrad {
+  font-size: 0.9em;
+  font-weight: bold;
+  padding: 0.2em 0.4em;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  border-radius: 0.2em;
+  display: inline-block;
+  outline: none;
+  border: none;
+}
+
+.btnGrad:hover {
+  background-position: right center;
+  color: #fff;
+  text-decoration: none;
+}
+
+.error {
+  color: #ff01ff;
+  padding: 0.2em 0.5em;
+}

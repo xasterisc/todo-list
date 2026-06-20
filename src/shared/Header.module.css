@@ -1,0 +1,16 @@
+header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+}
+
+nav {
+  margin-left: auto;
+  text-transform: uppercase;
+  margin-right: 1em;
+}
+
+h1 {
+  padding-left: 1em;
+  font-size: 3em;
+}
