@@ -8,13 +8,11 @@ import ProfilePage from './pages/ProfilePage';
 import NotFoundPage from './pages/NotFoundPage';
 import RequireAuth from './components/RequireAuth';
 import { Routes, Route } from 'react-router';
-import './App.css';
-import styles from './App.module.css';
 
 function App() {
   return (
     <>
-      <div className={styles.wrapper}>
+      <div>
         <Header />
         <Routes>
           <Route path='/' element={<HomePage />} />
