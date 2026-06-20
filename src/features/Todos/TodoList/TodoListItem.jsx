@@ -6,7 +6,6 @@ import {
 import { sanitizeInput } from '../../../utils/security';
 import { useEditableTitle } from '../../../hooks/useEditableTitle';
 import { useState } from 'react';
-import styles from './TodoListItem.module.css';
 
 const TodoListItem = ({ todo, onCompleteTodo, onUpdateTodo }) => {
   const {
@@ -59,7 +58,7 @@ const TodoListItem = ({ todo, onCompleteTodo, onUpdateTodo }) => {
   };
 
   return (
-    <li className={styles.todo}>
+    <li>
       <form onSubmit={handleUpdate}>
         {isEditing ? (
           <>
@@ -75,9 +74,7 @@ const TodoListItem = ({ todo, onCompleteTodo, onUpdateTodo }) => {
             <button type='submit' disabled={!isValidTodoTitle(workingTitle)}>
               Update
             </button>
-            {localError && (
-              <pre className={styles.errorWrapper}>{localError}</pre>
-            )}
+            {localError && <pre>{localError}</pre>}
           </>
         ) : (
           <>
