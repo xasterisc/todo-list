@@ -11,9 +11,9 @@ import { Routes, Route } from 'react-router';
 
 function App() {
   return (
-    <>
-      <div>
-        <Header />
+    <div className='app-container'>
+      <Header />
+      <main>
         <Routes>
           <Route path='/' element={<HomePage />} />
           <Route path='/about' element={<AboutPage />} />
@@ -36,8 +36,8 @@ function App() {
           />
           <Route path='*' element={<NotFoundPage />} />
         </Routes>
-      </div>
-    </>
+      </main>
+    </div>
   );
 }
 

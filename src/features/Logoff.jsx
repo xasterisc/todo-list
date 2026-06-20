@@ -22,12 +22,12 @@ const Logoff = () => {
   };
 
   return (
-    <>
+    <div>
       <button onClick={handleLogoff} disabled={isLoggingOff}>
         {isLoggingOff ? 'Logging off ...' : 'Log off'}
       </button>
       {error && <p>{error}</p>}
-    </>
+    </div>
   );
 };
 

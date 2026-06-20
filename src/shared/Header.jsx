@@ -6,15 +6,11 @@ const Header = () => {
   const { isAuthenticated } = useAuth();
 
   return (
-    <>
+    <header>
       <h1>Todo List</h1>
       <Navigation />
-      {isAuthenticated && (
-        <div>
-          <Logoff />
-        </div>
-      )}
-    </>
+      {isAuthenticated && <Logoff />}
+    </header>
   );
 };
 
