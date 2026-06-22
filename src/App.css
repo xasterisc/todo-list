@@ -3,3 +3,9 @@ main {
   padding: 0 3em;
   border-left: 0.7em solid #71ae21;
 }
+
+pre {
+  color: #ff01ff;
+  padding: 0.2em 0.5em;
+  font-style: italic;
+}

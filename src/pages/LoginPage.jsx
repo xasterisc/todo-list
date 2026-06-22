@@ -37,7 +37,7 @@ const LoginPage = () => {
   };
   return (
     <>
-      {authError && <p>{authError}</p>}
+      {authError && <pre>{authError}</pre>}
       <p>You must log in to view the page at {from}</p>
 
       <form onSubmit={handleSubmit}>

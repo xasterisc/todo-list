@@ -250,7 +250,7 @@ const TodosPage = () => {
     <>
       {error && (
         <div>
-          <p>{error}</p>
+          <pre>{error}</pre>
           <button onClick={() => dispatch({ type: TODO_ACTIONS.CLEAR_ERROR })}>
             Clear Error
           </button>
@@ -258,7 +258,7 @@ const TodosPage = () => {
       )}
       {filterError && (
         <div>
-          <p>{filterError}</p>
+          <pre>{filterError}</pre>
           <button
             onClick={() => dispatch({ type: TODO_ACTIONS.CLEAR_FILTER_ERROR })}
           >
