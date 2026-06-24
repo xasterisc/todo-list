@@ -58,6 +58,11 @@ button[type='submit'] {
   font-size: 0.8em;
 }
 
+button:disabled {
+  background-color: #9d9d9d;
+  cursor: not-allowed;
+}
+
 p,
 li {
   color: #9d9d9d;
