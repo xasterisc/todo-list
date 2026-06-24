@@ -1,6 +1,11 @@
 import TextInputWithLabel from '../../../shared/TextInputWithLabel';
-import { isValidTodoTitle } from '../../../utils/todoValidation';
+import {
+  isValidTodoTitle,
+  getTodoValidationError,
+} from '../../../utils/todoValidation';
+import { sanitizeInput } from '../../../utils/security';
 import { useEditableTitle } from '../../../hooks/useEditableTitle';
+import { useState } from 'react';
 
 const TodoListItem = ({ todo, onCompleteTodo, onUpdateTodo }) => {
   const {
@@ -11,17 +16,45 @@ const TodoListItem = ({ todo, onCompleteTodo, onUpdateTodo }) => {
     updateTitle,
     finishEdit,
   } = useEditableTitle(todo.title);
+  const [localError, setLocalError] = useState('');
 
-  const handleEdit = (event) => updateTitle(event.target.value);
+  const handleEdit = (event) => {
+    const newValue = event.target.value;
+    updateTitle(newValue);
+
+    const validationError = getTodoValidationError(newValue);
+    if (validationError) {
+      setLocalError(validationError);
+    } else {
+      setLocalError('');
+    }
+  };
+
+  const handleCancel = () => {
+    setLocalError('');
+    cancelEdit();
+  };
 
   const handleUpdate = (event) => {
     event.preventDefault();
+    setLocalError('');
 
-    if (!isEditing || !isValidTodoTitle(workingTitle)) {
+    if (!isEditing) return;
+
+    const validationError = getTodoValidationError(workingTitle);
+    if (validationError) {
+      setLocalError(validationError);
       return;
     }
-    const finalTitle = finishEdit();
-    onUpdateTodo({ ...todo, title: finalTitle.trim() });
+
+    const safeTitle = sanitizeInput(workingTitle);
+    if (!safeTitle) {
+      setLocalError('Invalid input detected. Please try again.');
+      return;
+    }
+
+    finishEdit();
+    onUpdateTodo({ ...todo, title: safeTitle });
   };
 
   return (
@@ -35,16 +68,13 @@ const TodoListItem = ({ todo, onCompleteTodo, onUpdateTodo }) => {
               value={workingTitle}
               onChange={handleEdit}
             />
-            <button type='button' onClick={cancelEdit}>
+            <button type='button' onClick={handleCancel}>
               Cancel
             </button>
-            <button
-              type='button'
-              onClick={handleUpdate}
-              disabled={!isValidTodoTitle(workingTitle)}
-            >
+            <button type='submit' disabled={!isValidTodoTitle(workingTitle)}>
               Update
             </button>
+            {localError && <p className='error'>{localError}</p>}
           </>
         ) : (
           <>

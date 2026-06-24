@@ -65,7 +65,7 @@ const ProfilePage = () => {
 
       <section>
         <h3>Account Information</h3>
-        <pre>user: {name}</pre>
+        <p>user: {name}</p>
       </section>
 
       <section>
@@ -75,7 +75,7 @@ const ProfilePage = () => {
             <em>Loading stats...</em>
           </p>
         ) : error ? (
-          <p style={{ color: 'red' }}>{error}</p>
+          <p className='error'>{error}</p>
         ) : statistics.total > 0 ? (
           <div>
             <p>

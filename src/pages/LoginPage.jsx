@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router';
 import { useAuth } from '../contexts/AuthContext';
+import styles from './LoginPage.module.css';
 
 const LoginPage = () => {
   const { login, isAuthenticated } = useAuth();
@@ -37,8 +38,10 @@ const LoginPage = () => {
   };
   return (
     <>
-      {authError && <p>{authError}</p>}
-      <p>You must log in to view the page at {from}</p>
+      {authError && <p className='error'>{authError}</p>}
+      <p className={styles.message}>
+        You must log in to view the page at {from}
+      </p>
 
       <form onSubmit={handleSubmit}>
         <label htmlFor='email'>email</label>

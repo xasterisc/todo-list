@@ -1,0 +1,97 @@
+main {
+  margin-top: 3em;
+  padding: 0 3em;
+  border-left: 0.7em solid #71ae21;
+}
+
+.error {
+  color: #ff01ff;
+  padding: 0.2em 0.5em;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.7em;
+}
+
+input {
+  margin-bottom: 1.5em;
+  display: block;
+  padding: 0.5em;
+  width: 80%;
+  background: #2b3337;
+  border: none;
+  border-bottom: 1px solid #506671;
+  color: #9d9d9d;
+  outline: 0;
+}
+
+input:focus {
+  border-bottom: 1px solid #71ae21;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px #2b3337 inset !important;
+  box-shadow: 0 0 0 1000px #2b3337 inset !important;
+
+  -webkit-text-fill-color: #9d9d9d !important;
+  caret-color: #9d9d9d;
+}
+
+button {
+  background: #2b3337;
+  color: white;
+  border: none;
+  padding: 0.8em 2em;
+  margin: 0.7em;
+}
+
+button[type='submit'] {
+  background: #71ae21;
+  color: #2b3337;
+  font-weight: bold;
+  border-radius: 2em;
+  font-size: 0.8em;
+}
+
+p,
+li {
+  color: #9d9d9d;
+}
+
+select {
+  border: 1px solid #506671;
+  background: #2b3337;
+  color: white;
+  padding: 0.5em;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+ul li form {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+}
+
+input[type='checkbox'] {
+  accent-color: #71ae21;
+}
+
+@media (min-width: 700px) {
+  .app-container {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    max-width: 850px;
+  }
+}

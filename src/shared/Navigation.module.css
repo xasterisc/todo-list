@@ -1,0 +1,27 @@
+.navList {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+  margin-top: 0;
+}
+
+.navLink {
+  text-decoration: none;
+  font-size: 1.2em;
+  color: white;
+}
+
+.navLink:global(.active) {
+  position: relative;
+  font-weight: bold;
+}
+
+.navLink:global(.active):before {
+  position: absolute;
+  content: '';
+  height: 0.3em;
+  width: 80%;
+  bottom: 0.1em;
+  z-index: -1;
+  background: #71ae21;
+}

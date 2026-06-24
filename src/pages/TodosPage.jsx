@@ -12,6 +12,7 @@ import {
 import { useAuth } from '../contexts/AuthContext';
 import { useSearchParams } from 'react-router';
 import StatusFilter from '../shared/StatusFilter';
+import styles from './TodosPage.module.css';
 
 const TodosPage = () => {
   const { token } = useAuth();
@@ -249,16 +250,16 @@ const TodosPage = () => {
   return (
     <>
       {error && (
-        <div>
-          <p>{error}</p>
+        <div className={styles.error}>
+          <p className='error'>{error}</p>
           <button onClick={() => dispatch({ type: TODO_ACTIONS.CLEAR_ERROR })}>
             Clear Error
           </button>
         </div>
       )}
       {filterError && (
-        <div>
-          <p>{filterError}</p>
+        <div className={styles.error}>
+          <p className='error'>{filterError}</p>
           <button
             onClick={() => dispatch({ type: TODO_ACTIONS.CLEAR_FILTER_ERROR })}
           >
@@ -272,13 +273,15 @@ const TodosPage = () => {
         </div>
       )}
       {isTodoListLoading && <p>Loading todos ...</p>}
-      <SortBy
-        sortBy={sortBy}
-        sortDirection={sortDirection}
-        onSortByChange={handleSortByChange}
-        onSortDirectionChange={handleSortDirectionChange}
-      />
-      <StatusFilter />
+      <div className={styles.sortWrapper}>
+        <SortBy
+          sortBy={sortBy}
+          sortDirection={sortDirection}
+          onSortByChange={handleSortByChange}
+          onSortDirectionChange={handleSortDirectionChange}
+        />
+        <StatusFilter />
+      </div>
       <FilterInput
         filterTerm={filterTerm}
         onFilterChange={handleFilterChange}
