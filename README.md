@@ -1,5 +1,7 @@
 # Todo List
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 A full-stack todo app built with React, featuring user authentication,
 real-time API sync, and multi-page navigation.
 
@@ -78,3 +80,15 @@ This project uses **ESLint** and **Prettier** to enforce code consistency.
 ```bash
 npx eslint . --fix
 ```
+
+## Contact
+
+**Mohamed Zouari** - business [at] zouari [dot] org
+
+- **LinkedIn:** [Mohamed Zouari](www.linkedin.com/in/dr-mohamed-zouari)
+- **GitHub:** [@xasterisc](https://github.com/xasterisc)
+- **Project Link:** [https://github.com/xasterisc/todo-list](https://github.com/xasterisc/todo-list)
+
+## License
+
+Distributed under the MIT License. See **[LICENSE](LICENSE)** for more information.
