@@ -5,7 +5,7 @@ const sanitizeInput = (input) => {
 
   return DOMPurify.sanitize(input.trim(), {
     ALLOWED_TAGS: [],
-    ADD_ATTR: [],
+    ALLOWED_ATTR: [],
   });
 };
 
