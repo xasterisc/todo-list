@@ -74,7 +74,7 @@ const TodoListItem = ({ todo, onCompleteTodo, onUpdateTodo }) => {
             <button type='submit' disabled={!isValidTodoTitle(workingTitle)}>
               Update
             </button>
-            {localError && <pre>{localError}</pre>}
+            {localError && <p className='error'>{localError}</p>}
           </>
         ) : (
           <>

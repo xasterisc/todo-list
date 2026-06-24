@@ -75,7 +75,7 @@ const ProfilePage = () => {
             <em>Loading stats...</em>
           </p>
         ) : error ? (
-          <pre>{error}</pre>
+          <p className='error'>{error}</p>
         ) : statistics.total > 0 ? (
           <div>
             <p>

@@ -12,11 +12,20 @@ body {
   font-style: normal;
   background: linear-gradient(
     0deg,
-    rgba(34, 34, 34, 1) 20%,
-    rgba(28, 28, 28, 1) 20%,
+    rgba(34, 34, 34, 1) 5%,
+    rgba(28, 28, 28, 1) 5%,
     rgba(28, 28, 28, 1) 100%
   );
-  min-height: 130vh;
+  min-height: 100vh;
   color: white;
   padding: 0.5em;
+
+  display: flex;
+  justify-content: center;
+}
+
+#root {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }

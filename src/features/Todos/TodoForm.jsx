@@ -5,6 +5,7 @@ import {
   getTodoValidationError,
 } from '../../utils/todoValidation';
 import { sanitizeInput } from '../../utils/security';
+import styles from './TodoForm.module.css';
 
 const TodoForm = ({ onAddTodo }) => {
   const inputRef = useRef(null);
@@ -46,7 +47,7 @@ const TodoForm = ({ onAddTodo }) => {
 
   return (
     <>
-      <form onSubmit={handleAddTodo}>
+      <form className={styles.container} onSubmit={handleAddTodo}>
         <TextInputWithLabel
           elementId='todoTitle'
           labelText='Todo'
@@ -58,7 +59,7 @@ const TodoForm = ({ onAddTodo }) => {
           Add Todo
         </button>
       </form>
-      {localError && <pre>{localError}</pre>}
+      {localError && <p className='error'>{localError}</p>}
     </>
   );
 };

@@ -4,10 +4,9 @@ main {
   border-left: 0.7em solid #71ae21;
 }
 
-pre {
+.error {
   color: #ff01ff;
   padding: 0.2em 0.5em;
-  font-style: italic;
 }
 
 label {
@@ -43,12 +42,18 @@ input:-webkit-autofill:active {
   caret-color: #9d9d9d;
 }
 
+button {
+  background: #2b3337;
+  color: white;
+  border: none;
+  padding: 0.8em 2em;
+  margin: 0.7em;
+}
+
 button[type='submit'] {
   background: #71ae21;
-  border: none;
   color: #2b3337;
   font-weight: bold;
-  padding: 0.8em 2em;
   border-radius: 2em;
   font-size: 0.8em;
 }
@@ -56,4 +61,37 @@ button[type='submit'] {
 p,
 li {
   color: #9d9d9d;
+}
+
+select {
+  border: 1px solid #506671;
+  background: #2b3337;
+  color: white;
+  padding: 0.5em;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+ul li form {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+}
+
+input[type='checkbox'] {
+  accent-color: #71ae21;
+}
+
+@media (min-width: 700px) {
+  .app-container {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    max-width: 850px;
+  }
 }

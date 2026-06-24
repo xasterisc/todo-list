@@ -38,7 +38,7 @@ const LoginPage = () => {
   };
   return (
     <>
-      {authError && <pre>{authError}</pre>}
+      {authError && <p className='error'>{authError}</p>}
       <p className={styles.message}>
         You must log in to view the page at {from}
       </p>

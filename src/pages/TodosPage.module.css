@@ -1,0 +1,14 @@
+.sortWrapper {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  margin-bottom: 0.5em;
+}
+
+.error {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin-bottom: 0.7em;
+}
