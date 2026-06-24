@@ -1,4 +1,5 @@
 import { Link } from 'react-router';
+import styles from './NotFoundPage.module.css';
 
 const NotFoundPage = () => {
   return (
@@ -9,13 +10,13 @@ const NotFoundPage = () => {
       <div>
         <h3>Try these options:</h3>
         <ul>
-          <li>
+          <li className={styles.wrapper}>
             <Link to='/'>Back to Home page</Link>
           </li>
-          <li>
+          <li className={styles.wrapper}>
             <Link to='/todos'>Check your todos</Link>
           </li>
-          <li>
+          <li className={styles.wrapper}>
             <Link to='/about'>Learn about this App</Link>
           </li>
         </ul>
